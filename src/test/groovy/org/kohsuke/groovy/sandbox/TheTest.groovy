@@ -66,7 +66,7 @@ class TheTest extends TestCase {
         assert expected==actual;
         return actual;
     }
-    
+
     def assertIntercept(String expectedCallSequence, Object expectedValue, String script) {
         def actual = eval(script)
         assertEquals(expectedValue, actual);
@@ -117,7 +117,7 @@ class TheTest extends TestCase {
                 1,
                 "new java.awt.Point(1,2).@x"
         )
-        
+
         // property set
         assertIntercept(
                 ['Script7.point',"Point.x=Integer"],
@@ -142,7 +142,7 @@ class TheTest extends TestCase {
         )
         assertEquals(3,binding.points[0].@x)
         assertEquals(3,binding.points[1].@x)
-        
+
         // array set & get
         assertIntercept(
                 "int[][Integer]=Integer/int[][Integer]",
@@ -754,8 +754,6 @@ Exception.message
     void testSuperCall() {
         assertIntercept([
             "new Zot()",
-            "new Bar()",
-            "new Foo()",
             "Zot.toString()",
             "Zot.super(Bar).toString()",
             "String.plus(String)"

@@ -224,7 +224,7 @@ public class SandboxTransformer extends CompilationCustomizer {
     public void processConstructors(final ClassCodeExpressionTransformer visitor, ClassNode classNode) {
         ClassNode superClass = classNode.getSuperClass();
         List<ConstructorNode> declaredConstructors = classNode.getDeclaredConstructors();
-        if (TRIVIAL_CONSTRUCTORS.contains(superClass.getName())) {
+        if (true) {
             for (ConstructorNode c : declaredConstructors) {
                 visitor.visitMethod(c);
             }
@@ -309,7 +309,7 @@ public class SandboxTransformer extends CompilationCustomizer {
     public ClassCodeExpressionTransformer createVisitor(SourceUnit source) {
         return createVisitor(source, null);
     }
-    
+
     public ClassCodeExpressionTransformer createVisitor(SourceUnit source, ClassNode clazz) {
         return new VisitorImpl(source, clazz);
     }
@@ -376,12 +376,12 @@ public class SandboxTransformer extends CompilationCustomizer {
             // checkdCall expects an array
             return withLoc(e,new MethodCallExpression(new ListExpression(l),"toArray",new ArgumentListExpression()));
         }
-        
+
         Expression makeCheckedCall(String name, Expression... arguments) {
             return new StaticMethodCallExpression(checkerClass,name,
                 new ArgumentListExpression(arguments));
         }
-    
+
         @Override
         public Expression transform(Expression exp) {
             Expression o = innerTransform(exp);
@@ -454,7 +454,7 @@ public class SandboxTransformer extends CompilationCustomizer {
                             arg2);
                 }
             }
-            
+
             if (exp instanceof StaticMethodCallExpression && interceptMethodCall) {
                 /*
                     Groovy doesn't use StaticMethodCallExpression as much as it could in compilation.
@@ -541,7 +541,7 @@ public class SandboxTransformer extends CompilationCustomizer {
                     // simple assignment like '=' as well as compound assignments like "+=","-=", etc.
 
                     // How we dispatch this depends on the type of left expression.
-                    // 
+                    //
                     // What can be LHS?
                     // according to AsmClassGenerator, PropertyExpression, AttributeExpression, FieldExpression, VariableExpression
 

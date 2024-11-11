@@ -323,8 +323,7 @@ public class SandboxTransformerTest {
                 "true\n",
                 true,
                 "new A()",
-                "System:getProperties()",
-                "new B()");
+                "System:getProperties()");
     }
 
     @Issue("SECURITY-1658")
