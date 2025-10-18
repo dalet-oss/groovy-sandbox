@@ -46,5 +46,6 @@ else
   gpg2 --pinentry-mode=loopback --passphrase ${SONATYPE_GPGKEY_PASSPHRASE} --sign /tmp/foo.txt
 
   # Build, sign and publish the artifacts to Maven Central Portal
-  mvn -ntp -Prelease deploy -DskipTests -Drevision=${VERSION} -Dgpg.executable=gpg2 -Dgpgkey.passphrase=${SONATYPE_GPGKEY_PASSPHRASE}
+  # We have to set -DskipNexusStagingDeployMojo because the Jenkins parent POM would otherwise try to deploy using legacy mechanisms, and fail
+  mvn -ntp -Prelease deploy -DskipTests -Drevision=${VERSION} -Dgpg.executable=gpg2 -Dgpgkey.passphrase=${SONATYPE_GPGKEY_PASSPHRASE} -DskipNexusStagingDeployMojo
 fi
